@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1 - Evaluación 3</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/estiloindex.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Formulario de Notas</h2>
+        <form method="POST">
+            <div class="form-group">
+                <label for="n1">Nota 1:</label>
+                <input type="number" name="n1" min="10" max="70" value="0">
+            </div>
+            <div class="form-group">
+                <label for="n2">Nota 2:</label>
+                <input type="number" name="n2" min="10" max="70" value="0">
+            </div>
+            <div class="form-group">
+                <label for="n3">Nota 3:</label>
+                <input type="number" name="n3" min="10" max="70" value="0">
+            </div>
+            <div class="form-group">
+                <label for="asistencia">Asistencia (%):</label>
+                <input type="number" name="asistencia" min="0" max="100" value="100">
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Enviar Datos">
+            </div>
+        </form>
+        {% if promedio %}
+        <div>
+            <p class="negrita">El promedio de las 3 notas ingresadas es: <span>{{ promedio }}</span></p>
+            <p class="negrita">Estado: <span>{{ resultado }}</span></p>
+            <img src="{{ ruta }}" width="100px" height="100px">
+        </div>
+        {% endif %}
+        <br><br>
+        <a href="/" class="button">Volver al Home</a>
+    </div>
+</body>
+</html>

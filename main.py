@@ -2,6 +2,12 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
+# Usuarios predefinidos para Ejercicio 2
+usuarios = {
+    'juan': 'admin',
+    'pepe': 'user'
+}
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -9,38 +15,45 @@ def index():
 @app.route('/ejercicio1', methods=['GET', 'POST'])
 def ejercicio1():
     if request.method == 'POST':
-        # Ejemplo de cómo manejar un formulario y procesar datos
-        n1 = float(request.form.get('n1', 0))
-        n2 = float(request.form.get('n2', 0))
-        n3 = float(request.form.get('n3', 0))
-        asistencia = int(request.form.get('asistencia', 0))
-        promedio = (n1 + n2 + n3) / 3
-        if promedio >= 40 and asistencia >= 75:
-            resultado = 'Aprobado'
-            # ruta = '/static/img/aprobado.jpg'
+        nombre = request.form['nombre']
+        edad = int(request.form['edad'])
+        cantidad = int(request.form['cantidad'])
+
+        precio_por_tarro = 9000
+        total_sin_descuento = cantidad * precio_por_tarro
+
+        # Aplicar descuentos según la edad
+        if 18 <= edad <= 30:
+            descuento = 0.15
+        elif edad > 30:
+            descuento = 0.25
         else:
-            resultado = 'Reprobado'
-            # ruta = '/static/img/reprobado.jpg'
-        return render_template('ejercicio1.html', promedio=promedio, resultado=resultado)
+            descuento = 0
+
+        descuento_total = total_sin_descuento * descuento
+        total_con_descuento = total_sin_descuento - descuento_total
+
+        return render_template('ejercicio1.html', nombre=nombre, total_sin_descuento=total_sin_descuento, descuento_total=descuento_total, total_con_descuento=total_con_descuento)
+
     return render_template('ejercicio1.html')
 
 @app.route('/ejercicio2', methods=['GET', 'POST'])
 def ejercicio2():
+    mensaje = None
     if request.method == 'POST':
-        nom1 = request.form.get('nom1', '')
-        nom2 = request.form.get('nom2', '')
-        nom3 = request.form.get('nom3', '')
-        if len(nom1) > len(nom2) and len(nom1) > len(nom3):
-            mayor = nom1
-            cantidad = len(nom1)
-        elif len(nom2) > len(nom1) and len(nom2) > len(nom3):
-            mayor = nom2
-            cantidad = len(nom2)
+        nombre = request.form['nombre']
+        password = request.form['password']
+
+        # Verificación de usuario
+        if nombre in usuarios and usuarios[nombre] == password:
+            if nombre == 'juan':
+                mensaje = f'Bienvenido Administrador {nombre}'
+            elif nombre == 'pepe':
+                mensaje = f'Bienvenido Usuario {nombre}'
         else:
-            mayor = nom3
-            cantidad = len(nom3)
-        return render_template('ejercicio2.html', mayor=mayor, cantidad=cantidad)
-    return render_template('ejercicio2.html')
+            mensaje = 'Usuario o contraseña incorrectos'
+
+    return render_template('ejercicio2.html', mensaje=mensaje)
 
 if __name__ == '__main__':
     app.run(debug=True)

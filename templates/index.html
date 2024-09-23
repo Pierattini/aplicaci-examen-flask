@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Principal</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/estiloindex.css') }}">
-    <title>Evaluación 3</title>
 </head>
 <body>
     <div class="container">
-        <h2>Requerimientos</h2>
-        <h1>Evaluación</h1>
-        <br>
-        <a href="/ejercicio1" class="button">Ejercicio 1</a>
-        <a href="/ejercicio2" class="button">Ejercicio 2</a>
+        <div class="grid-container">
+            <div class="grid-item" style="background-color: purple;">
+                <a href="/ejercicio1">Ejercicio 1</a>
+            </div>
+            <div class="grid-item" style="background-color: limegreen;">
+                <a href="/ejercicio2">Ejercicio 2</a>
+            </div>
+        </div>
     </div>
 </body>
 </html>

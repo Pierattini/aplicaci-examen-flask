@@ -3,41 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicio 2 - Evaluación 3</title>
+    <title>Inicio de sesión</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/estiloindex.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>Ejercicio 2</h1>
-        <br><br>
+        <h2>Inicio de sesión</h2>
         <form method="POST">
             <div class="form-group">
-                <label for="nom1">Nombre 1:</label>
-                <input type="text" id="nom1" name="nom1">
+                <label for="nombre">Ingresa tu nombre</label>
+                <input type="text" name="nombre" required>
             </div>
             <div class="form-group">
-                <label for="nom2">Nombre 2:</label>
-                <input type="text" id="nom2" name="nom2">
+                <label for="password">Ingresa tu contraseña</label>
+                <input type="password" name="password" required>
             </div>
             <div class="form-group">
-                <label for="nom3">Nombre 3:</label>
-                <input type="text" id="nom3" name="nom3">
-            </div>
-            <br>
-            <div class="form-group">
-                <input type="submit" value="Enviar Datos">
+                <input type="submit" value="Verificar">
             </div>
         </form>
 
-        {% if cantidad %}
-        <div>
-            <p class="negrita">El nombre con mayor cantidad de caracteres es: <span>{{ mayor }}</span>, el cual contiene: <span>{{ cantidad }}</span> caracteres.</p>
-        </div>
+        {% if mensaje %}
+        <p>{{ mensaje }}</p>
         {% endif %}
-        <br>
-        <a href="/" class="button">Volver al Home</a>
     </div>
 </body>
 </html>
-
-

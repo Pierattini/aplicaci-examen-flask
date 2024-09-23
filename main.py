@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-# Usuarios predefinidos para Ejercicio 2
+
 usuarios = {
     'juan': 'admin',
     'pepe': 'user'
@@ -22,7 +22,7 @@ def ejercicio1():
         precio_por_tarro = 9000
         total_sin_descuento = cantidad * precio_por_tarro
 
-        # Aplicar descuentos según la edad
+
         if 18 <= edad <= 30:
             descuento = 0.15
         elif edad > 30:
@@ -44,7 +44,7 @@ def ejercicio2():
         nombre = request.form['nombre']
         password = request.form['password']
 
-        # Verificación de usuario
+      
         if nombre in usuarios and usuarios[nombre] == password:
             if nombre == 'juan':
                 mensaje = f'Bienvenido Administrador {nombre}'
